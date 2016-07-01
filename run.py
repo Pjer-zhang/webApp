@@ -16,12 +16,19 @@ mysql.init_app(app)
 
 @app.route('/')
 def main():
-    return render_template('index.html')
+    if session.get('user'):
+        return render_template('logined_index.html')
+    else:
+        return render_template('index.html')
 
 
 @app.route('/showSignUp')
 def showSignUp():
     return render_template('signup.html')
+
+@app.route('/showAddWish')
+def showAddWish():
+    return render_template('addWish.html')
 
 
 @app.route('/showSignin')
