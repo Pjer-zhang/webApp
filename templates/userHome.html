@@ -7,15 +7,14 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
       <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
       <script src="{{ url_for('static' ,filename = '/js/jquery-2.0.0.min.js')}}"></script>
-      <link href="{{ url_for('static' ,filename = 'css/signup.css')}}" rel="stylesheet">
-      <script src="{{ url_for('static' ,filename = '/js/signUp.js')}}"></script >
       <script src="{{ url_for('static' ,filename = '/js/bootstrap.min.js')}}"></script>
-      <script src="{{ url_for('static' ,filename = '/js/index.js')}}"></script>
       <link rel="stylesheet" href="{{url_for('static',filename='/css/normalize.css')}}">
       <link rel='stylesheet prefetch' href="{{url_for('static',filename='/css/bootstrap.min.css')}}">
-      <link rel="stylesheet" href="{{url_for('static',filename='/css/style.css')}}">
       <link rel="icon" href="{{url_for('static',filename='/img/favicon.ico')}}" />
       <link rel="shortcut icon" href="{{url_for('static',filename='/img/favicon.ico')}}" />
+
+      <link href="{{ url_for('static' ,filename = 'css/signup.css')}}" rel="stylesheet">
+      <script src="{{ url_for('static' ,filename = '/js/signUp.js')}}"></script >
 
   </head>
 
@@ -30,28 +29,27 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">Brand</a>
+    <a class="navbar-brand" href="#">Exchange</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Link</a></li>
-      <li><a href="#">Link</a></li>
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Number Pool</a></li>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+        <a href="#" class="more" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-          <li class="divider"></li>
-          <li><a href="#">One more separated link</a></li>
+          <li><a href="#">Random Ring</a></li>
+          <li><a href="#">Hot Ring</a></li>
+            <li class="divider"></li>
+          <li><a href="#">My github</a></li>
+          <li><a href="#">contact Admin</a></li>
+
         </ul>
       </li>
     </ul>
-    <div class="col-sm-3 col-md-3">
+    <div class="col-sm-3 col-md-4">
         <form class="navbar-form" role="search">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" name="q">
@@ -62,15 +60,13 @@
         </form>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">Link</a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
+          <li><a href="#">settings</a></li>
           <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
           <li class="divider"></li>
-          <li><a href="#">Separated link</a></li>
+          <li><a href="#">signed in as</a></li>
         </ul>
       </li>
     </ul>
@@ -87,7 +83,7 @@
             <li role="presentation" class="active"><a href="/logout">Logout</a></li>
           </ul>
         </nav>
-        <h3 class="text-muted">Python Flask App</h3>
+        <h3 class="text-muted">Pjer's App</h3>
       </div>
 
       <div class="jumbotron">

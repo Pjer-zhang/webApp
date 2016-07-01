@@ -1,4 +1,7 @@
-
+body {
+  padding-top: 0px;
+  padding-bottom: 40px;
+}
 
 .form-signin {
   max-width: 330px;

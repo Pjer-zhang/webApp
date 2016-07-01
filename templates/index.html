@@ -4,16 +4,73 @@
   <head>
     <title>Pjer's App</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
-    <link href="{{ url_for('static' ,filename = 'css/signup.css')}}" rel="stylesheet">
-    <script src="{{ url_for('static' ,filename = '/js/jquery-1.11.2.js')}}"></script>
-    <script src="{{ url_for('static' ,filename = '/js/signUp.js')}}"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
+      <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+      <script src="{{ url_for('static' ,filename = '/js/jquery-2.0.0.min.js')}}"></script>
+      <script src="{{ url_for('static' ,filename = '/js/bootstrap.min.js')}}"></script>
+      <link rel="stylesheet" href="{{url_for('static',filename='/css/normalize.css')}}">
+      <link rel='stylesheet prefetch' href="{{url_for('static',filename='/css/bootstrap.min.css')}}">
+      <link rel="icon" href="{{url_for('static',filename='/img/favicon.ico')}}" />
+      <link rel="shortcut icon" href="{{url_for('static',filename='/img/favicon.ico')}}" />
    
   </head>
 
   <body>
+
+  <nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">Exchange</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Number Pool</a></li>
+      <li class="dropdown">
+        <a href="#" class="more" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Random Ring</a></li>
+          <li><a href="#">Hot Ring</a></li>
+            <li class="divider"></li>
+          <li><a href="#">My github</a></li>
+          <li><a href="#">contact Admin</a></li>
+
+        </ul>
+      </li>
+    </ul>
+    <div class="col-sm-3 col-md-4">
+        <form class="navbar-form" role="search">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="q">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+        </div>
+        </form>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">settings</a></li>
+          <li><a href="#">Another action</a></li>
+          <li class="divider"></li>
+          <li><a href="#">signed in as</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
+
+
 
     <div class="container">
       <div class="header">
@@ -33,29 +90,6 @@
         <p><a class="btn btn-lg btn-success" href="/showSignUp" role="button">Sign up today</a></p>
       </div>
 
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>Bucket List</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Bucket List</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Bucket List</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-
-        <div class="col-lg-6">
-          <h4>Bucket List</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Bucket List</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Bucket List</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-      </div>
 
       <footer class="footer">
         <p>&copy; Company 2015</p>
