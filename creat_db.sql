@@ -108,7 +108,6 @@ USE `users`;
 DROP procedure IF EXISTS `sp_GetWishByUser`;
 
 DELIMITER $$
-USE `BucketList`$$
 CREATE PROCEDURE `sp_GetWishByUser` (
 IN p_user_id bigint
 )
