@@ -8,6 +8,7 @@
       <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
       <script src="{{ url_for('static' ,filename = 'js/jquery-2.0.0.min.js')}}"></script>
       <script src="{{ url_for('static' ,filename = 'js/bootstrap.min.js')}}"></script>
+      <script src="{{ url_for('static' ,filename = 'js/addwish.js')}}"></script>
       <link rel="stylesheet" href="{{url_for('static',filename='css/normalize.css')}}">
       <link rel='stylesheet prefetch' href="{{url_for('static',filename='css/bootstrap.min.css')}}">
       <link rel="icon" href="{{url_for('static',filename='img/favicon.ico')}}" />
@@ -42,7 +43,6 @@
         <ul class="dropdown-menu">
           <li><a href="#">Random Ring</a></li>
           <li><a href="#">Hot Ring</a></li>
-            <li class="divider"></li>
           <li><a href="#">My github</a></li>
           <li><a href="#">contact Admin</a></li>
 
@@ -59,25 +59,17 @@
         </div>
         </form>
     </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">settings</a></li>
-          <li><a href="#">Another action</a></li>
-          <li class="divider"></li>
-          <li><a href="#">signed in as</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div><!-- /.navbar-collapse -->
+     <div id="logdiv">
+      <div class="pull-right" style="margin-top: 5px">User: {{ user_name }}   <a class="btn btn-warning" role="button"  href="/logout">Log Out  <span class="glyphicon glyphicon-log-out"></span></a> </div>
+        </div>
+     </div><!-- /.navbar-collapse -->
 </nav>
 
 
 
 
     <div class="container-fluid">
-      <div class="header">
+      <!--div class="header">
         <nav>
           <ul class="nav nav-pills pull-right">
               <li role="presentation"><a href="/showAddWish">Add Wish</a></li>
@@ -85,10 +77,11 @@
           </ul>
         </nav>
         <h3 class="text-muted">Pjer's App</h3>
-      </div>
+      </div-->
 
-      <div class="jumbotron">
-        <h1>Welcome Home !!</h1>
+        <h1>{{ user_name }}'s Home</h1>
+<h2>Wish List</h2>
+      <div id="wishlist" class="jumbotron">
 
       </div>
 

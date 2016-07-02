@@ -1,5 +1,5 @@
 #! /usr/bin/python
-from flask import Flask, render_template, json, request,redirect,session
+from flask import Flask, render_template, json, request,redirect,session,url_for
 from flask.ext.mysql import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -34,7 +34,7 @@ def showAddWish():
 @app.route('/showSignin')
 def showSignin():
     if session.get('user'):
-        return render_template('userHome.html')
+        return redirect(url_for('userHome',user_name=session['username']))
     else:
         return render_template('signin.html')
 
@@ -42,7 +42,7 @@ def showSignin():
 @app.route('/userHome')
 def userHome():
     if session.get('user'):
-        return render_template('userHome.html')
+        return render_template('userHome.html',user_name=session['username'])
     else:
         return render_template('error.html', error='Unauthorized Access')
 
@@ -70,7 +70,8 @@ def validateLogin():
         if len(data) > 0:
             if str(data[0][3])==_password:#check_password_hash(str(data[0][3]), _password):
                 session['user'] = data[0][0]
-                return redirect('/userHome')
+                session['username'] = data[0][1]
+                return redirect( url_for( 'userHome',user_name=session['username']))
             else:
                 return render_template('error.html', error='Wrong Email address or Password.')
         else:
@@ -116,6 +117,63 @@ def signUp():
     finally:
         cursor.close()
         conn.close()
+
+
+@app.route('/addWish',methods=['POST'])
+def addWish():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    try:
+        if session.get('user'):
+            _num = request.form['inputTitle']
+            _description = request.form['inputDescription']
+            _user = session.get('user')
+
+            cursor.callproc('sp_addWish',(_num,_description,_user))
+            data = cursor.fetchall()
+
+            if len(data) is 0:
+                conn.commit()
+                return redirect( url_for(''))
+            else:
+                message = str(data[0])
+                return render_template('error.html',error = message[3:-3])
+
+        else:
+            return render_template('error.html',error = 'Unauthorized Access')
+    except Exception as e:
+        return render_template('error.html',error = str(e))
+    finally:
+        cursor.close()
+        conn.close()
+
+
+@app.route('/getWish')
+def getWish():
+    con = mysql.connect()
+    cursor = con.cursor()
+    try:
+        if session.get('user'):
+            _user = session.get('user')
+
+            cursor.callproc('sp_GetWishByUser', (_user,))
+            wishes = cursor.fetchall()
+
+            wishes_dict = []
+            for wish in wishes:
+                wish_dict = {
+                    'Id': wish[0],
+                    'Title': wish[1],
+                    'Description': wish[2],
+                    'Date': wish[4]}
+                wishes_dict.append(wish_dict)
+
+            return json.dumps(wishes_dict)
+        else:
+            return render_template('error.html', error='Unauthorized Access')
+    except Exception as e:
+        return render_template('error.html', error=str(e))
+
 
 
 if __name__ == "__main__":
