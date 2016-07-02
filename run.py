@@ -134,7 +134,7 @@ def addWish():
 
             if len(data) is 0:
                 conn.commit()
-                return redirect( url_for(''))
+                return redirect( url_for('userHome',user_name=session['username']))
             else:
                 message = str(data[0])
                 return render_template('error.html',error = message[3:-3])
