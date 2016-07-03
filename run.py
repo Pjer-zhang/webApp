@@ -4,6 +4,8 @@ from flask.ext.mysql import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
+from codecs import  *
+
 
 mysql = MySQL()
 app = Flask(__name__)
@@ -104,7 +106,7 @@ def signUp():
 
 
             _hashed_password = _password# generate_password_hash(_password)
-            cursor.callproc('sp_createUser', (_name, _email, _hashed_password))
+            cursor.callproc('sp_createUser', (_name.decode().encode('utf-8'), _email, _hashed_password))
             data = cursor.fetchall()
 
             if len(data) is 0:
