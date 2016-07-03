@@ -9,6 +9,7 @@
       <script src="{{ url_for('static' ,filename = 'js/jquery-2.0.0.min.js')}}"></script>
       <script src="{{ url_for('static' ,filename = 'js/bootstrap.min.js')}}"></script>
       <script src="{{ url_for('static' ,filename = 'js/addwish.js')}}"></script>
+      <script src="{{ url_for('static' ,filename = 'js/jquery.tmpl.js')}}"></script>
       <link rel="stylesheet" href="{{url_for('static',filename='css/normalize.css')}}">
       <link rel='stylesheet prefetch' href="{{url_for('static',filename='css/bootstrap.min.css')}}">
       <link rel="icon" href="{{url_for('static',filename='img/favicon.ico')}}" />
@@ -17,7 +18,41 @@
       <link href="{{ url_for('static' ,filename = 'css/signup.css')}}" rel="stylesheet">
       <script src="{{ url_for('static' ,filename = 'js/signUp.js')}}"></script >
 
+
+
+
+      <script id="listTemplate" type="text/x-jQuery-tmpl">
+       <li class="list-group-item">
+                            <div class="checkbox">
+                                <label>
+                                    <h3>${Title}</h3>
+                                </label>
+                            </div>
+
+                            <div class="pull-right action-buttons">
+                               <a data-id=${Id} onclick="Edit(this)" ><span class="glyphicon glyphicon-pencil"></span></a>
+                               <a data-id=${Id} onclick="ConfirmDelete(this)" ><span class="glyphicon glyphicon-trash"></span></a>
+                            </div>
+                            <p>${Description}</p>
+                        </li>
+        </script>
+
+
+
   </head>
+  <style>
+    .trash {
+        color: rgb(209, 91, 71);
+    }
+    .panel-body .checkbox {
+        display: inline-block;
+        margin: 0px;
+    }
+    .list-group {
+        margin-bottom: 0px;
+    }
+</style>
+
 
   <body>
 
@@ -81,9 +116,75 @@
 
         <h1>{{ user_name }}'s Home</h1>
 <h2>Wish List</h2>
-      <div id="wishlist" class="jumbotron">
+      <!--div id="wishlist" class="jumbotron">
 
+      </-div-->
+
+
+        <div class="row">
+        <div class="col-md-12">
+
+        <div class="panel-body">
+
+            <ul id="ulist" class="list-group">
+
+
+
+            </ul>
+        </div>
+
+        </div>
+        </div>
+
+
+
+
+
+
+ <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="editModalLabel">Update Wish</h4>
       </div>
+      <div class="modal-body">
+        <form role="form">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Title:</label>
+            <input type="text" class="form-control" id="editTitle">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Description:</label>
+            <textarea class="form-control" id="editDescription"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="btnUpdate" type="button" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="text-align:center; align-content: center">
+
+                <h2 class="modal-title" style="color:Orange;" id="deleteModalLabel">warning</h2>
+                <p style="font-size: larger;margin-top: 10px">You are going to Delete this Tab from database,this step is not reversible !!</p>
+            </div>
+
+            <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="Delete()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
           <ul class="nav nav-pills pull-right">

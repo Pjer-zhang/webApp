@@ -181,6 +181,80 @@ def getWish():
         return render_template('error.html', error=str(e))
 
 
+@app.route('/getWishById', methods=['POST'])
+def getWishById():
+    try:
+        if session.get('user'):
+
+            _id = request.form['id']
+            _user = session.get('user')
+
+            conn = mysql.connect()
+            cursor = conn.cursor()
+            cursor.callproc('sp_GetWishById', (_id, _user))
+            result = cursor.fetchall()
+
+            wish = []
+            wish.append({'Id': result[0][0], 'Title': result[0][1], 'Description': result[0][2]})
+
+            return json.dumps(wish)
+        else:
+            return render_template('error.html', error='Unauthorized Access')
+    except Exception as e:
+        return render_template('error.html', error=str(e))
+
+
+@app.route('/updateWish', methods=['POST'])
+def updateWish():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    try:
+        if session.get('user'):
+            _user = session.get('user')
+            _title = request.form['title']
+            _description = request.form['description']
+            _wish_id = request.form['id']
+
+
+            cursor.callproc('sp_updateWish', (_title, _description, _wish_id, _user))
+            data = cursor.fetchall()
+
+            if len(data) is 0:
+                conn.commit()
+                return json.dumps({'status': 'OK'})
+            else:
+                return json.dumps({'status': 'ERROR'})
+    except Exception as e:
+        return render_template('error.html',error=str(e))#json.dumps({'status': e})
+    finally:
+        cursor.close()
+        conn.close()
+
+
+@app.route('/deleteWish', methods=['POST'])
+def deleteWish():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    try:
+        if session.get('user'):
+            _id = request.form['id']
+            _user = session.get('user')
+
+            cursor.callproc('sp_deleteWish', (_id, _user))
+            result = cursor.fetchall()
+
+            if len(result) is 0:
+                conn.commit()
+                return json.dumps({'status': 'OK'})
+            else:
+                return json.dumps({'status': 'An Error occured'})
+        else:
+            return render_template('error.html', error='Unauthorized Access')
+    except Exception as e:
+        return json.dumps({'status': str(e)})
+    finally:
+        cursor.close()
+        conn.close()
 
 if __name__ == "__main__":
     app.run(port=5002)

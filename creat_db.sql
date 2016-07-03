@@ -27,7 +27,7 @@ BEGIN
         select 'UserNeckname Exists !!';
 
     ELSE
-
+SET NAMES 'utf8';
         insert into ring_users
         (
             user_name,
@@ -83,6 +83,7 @@ BEGIN
     if  (exists(SELECT 1 FROM  ring_wish WHERE ((wish_user_id = p_user_id) AND (wish_num = p_num)) ))THEN
       SELECT 'Wish number already in wish-list';
     ELSE
+      SET NAMES 'utf8';
     insert into ring_wish(
         wish_num,
         wish_description,
@@ -108,6 +109,7 @@ USE `users`;
 DROP procedure IF EXISTS `sp_GetWishByUser`;
 
 DELIMITER $$
+USE `BucketList`$$
 CREATE PROCEDURE `sp_GetWishByUser` (
 IN p_user_id bigint
 )
@@ -117,4 +119,46 @@ END$$
 
 DELIMITER ;
 
-ALTER DATABASE tinyCMS CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER DATABASE users CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE ring_users CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+ALTER TABLE ring_wish CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+
+DELIMITER $$
+ use users;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetWishById`(
+IN p_wish_id bigint,
+In p_user_id bigint
+)
+BEGIN
+select * from ring_wish where wish_id = p_wish_id and wish_user_id = p_user_id;
+END
+
+
+$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_updateWish`(
+IN p_title varchar(45),
+IN p_description varchar(1000),
+IN p_wish_id bigint,
+In p_user_id bigint
+)
+BEGIN
+update ring_wish set wish_id = p_title,wish_description = p_description
+    where wish_id = p_wish_id and wish_user_id = p_user_id;
+END$$
+DELIMITER ;
+
+
+
+DELIMITER $$
+USE `users`$$
+CREATE PROCEDURE `sp_deleteWish` (
+IN p_wish_id bigint,
+IN p_user_id bigint
+)
+BEGIN
+delete from ring_wish where wish_id = p_wish_id and wish_user_id = p_user_id;
+END$$
+
+DELIMITER ;
