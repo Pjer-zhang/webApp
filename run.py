@@ -2,6 +2,8 @@
 from flask import Flask, render_template, json, request,redirect,session,url_for
 from flask.ext.mysql import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
+os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 
 mysql = MySQL()
 app = Flask(__name__)
