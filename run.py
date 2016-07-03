@@ -104,9 +104,9 @@ def signUp():
 
             # All Good, let's call MySQL
 
-
             _hashed_password = _password# generate_password_hash(_password)
-            cursor.callproc('sp_createUser', (_name.decode(), _email, _hashed_password))
+            cursor.execute("SET NAMES 'utf8';")
+            cursor.callproc('sp_createUser', (_name, _email, _hashed_password))
             data = cursor.fetchall()
 
             if len(data) is 0:
@@ -134,6 +134,7 @@ def addWish():
             _description = request.form['inputDescription']
             _user = session.get('user')
 
+            cursor.execute("SET NAMES 'utf8';")
             cursor.callproc('sp_addWish',(_num,_description,_user))
             data = cursor.fetchall()
 
