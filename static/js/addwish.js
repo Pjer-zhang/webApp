@@ -155,7 +155,6 @@ $(function(){
 			data : {title:$('#editTitle_have').val(),description:$('#editDescription_have').val(),id:localStorage.getItem('editId')},
 			type : 'POST',
 			success: function(res){
-            Console.log(res);
 			$('#editModal_have').modal('hide');
 				Gethave();
 			},
