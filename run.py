@@ -181,6 +181,39 @@ def getWish():
         return render_template('error.html', error=str(e))
 
 
+@app.route('/getHave')
+def getHave():
+    con = mysql.connect()
+    cursor = con.cursor()
+    try:
+        if session.get('user'):
+            _user = session.get('user')
+
+            cursor.callproc('sp_GetHaveByUser', (_user,))
+            ring_have = cursor.fetchall()
+            print ring_have
+            print len(ring_have)
+            print len(ring_have[0])
+            if len(ring_have[0])>5:
+                have_dict={
+                    'ihavenum':ring_have[0][4],
+                    'ihavedes':ring_have[0][5]
+                }
+            else:
+                have_dict={
+                    'ihavenum': ring_have[0][4],
+                    'ihavedes': 'no description'
+                }
+            print have_dict
+
+            return json.dumps(have_dict)
+        else:
+            return render_template('error.html', error='Unauthorized Access')
+    except Exception as e:
+        return render_template('error.html', error=str(e))
+
+
+
 @app.route('/getWishById', methods=['POST'])
 def getWishById():
     try:
@@ -202,6 +235,9 @@ def getWishById():
             return render_template('error.html', error='Unauthorized Access')
     except Exception as e:
         return render_template('error.html', error=str(e))
+
+
+
 
 
 @app.route('/updateWish', methods=['POST'])
@@ -229,6 +265,35 @@ def updateWish():
     finally:
         cursor.close()
         conn.close()
+
+
+
+@app.route('/updateHave', methods=['POST'])
+def updateHave():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    try:
+        if session.get('user'):
+            _user = session.get('user')
+            _title = request.form['title']
+            _description = request.form['description']
+            #_wish_id = request.form['id']
+
+
+            cursor.callproc('sp_updateHave', (_title, _description, _user))
+            data = cursor.fetchall()
+
+            if len(data) is 0:
+                conn.commit()
+                return json.dumps({'status': 'OK'})
+            else:
+                return json.dumps({'status': 'ERROR'})
+    except Exception as e:
+        return render_template('error.html',error=str(e))#json.dumps({'status': e})
+    finally:
+        cursor.close()
+        conn.close()
+
 
 
 @app.route('/deleteWish', methods=['POST'])

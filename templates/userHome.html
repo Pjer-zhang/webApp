@@ -121,22 +121,27 @@
       </-div-->
 
 
+        <p>wish</p>
         <div class="row">
         <div class="col-md-12">
-
         <div class="panel-body">
-
             <ul id="ulist" class="list-group">
-
-
-
             </ul>
         </div>
-
         </div>
         </div>
 
+        <p>have</p>
 
+
+        <div class="jumbotron" style="margin: 5%">
+        <div  class="list-group-item active">
+            <h2 class="list-group-item-heading" id="ihavenum">None</h2>
+            <div class="pull-right action-buttons"><a data-id=${Id} onclick="Edithave(this)" ><span class="glyphicon glyphicon-pencil" style="color: white"></span></a>
+            </div>
+                <p class="list-group-item-text" id="ihavedes">None</p>
+        </div>
+        </div>
 
 
 
@@ -167,6 +172,41 @@
     </div>
   </div>
 </div>
+
+
+
+
+        <div class="modal fade" id="editModal_have" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="editModalLabel_have">Update Wish</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Title:</label>
+            <input type="text" class="form-control" id="editTitle_have">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Description:</label>
+            <textarea class="form-control" id="editDescription_have"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="btnUpdate_have" type="button" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 
 
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">

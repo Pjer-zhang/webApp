@@ -11,6 +11,10 @@ CREATE TABLE `users`.`ring_users` (
   `user_password` VARCHAR(200) NULL,
   PRIMARY KEY (`user_id`));
 
+use users;
+alter TABLE ring_users add COLUMN ihave int;
+alter TABLE ring_users add COLUMN ihave_des TEXT(400);
+
 
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_createUser`(
@@ -109,9 +113,9 @@ USE `users`;
 DROP procedure IF EXISTS `sp_GetWishByUser`;
 
 DELIMITER $$
-USE `BucketList`$$
+USE `users`$$
 CREATE PROCEDURE `sp_GetWishByUser` (
-IN p_user_id bigint
+IN p_user_id INT
 )
 BEGIN
     select * from ring_wish where wish_user_id = p_user_id;
@@ -127,35 +131,81 @@ ALTER TABLE ring_wish CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 DELIMITER $$
  use users;
+DROP procedure IF EXISTS `users`.`sp_GetWishById`;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetWishById`(
-IN p_wish_id bigint,
-In p_user_id bigint
+IN p_wish_id INT,
+In p_user_id INT
 )
 BEGIN
 select * from ring_wish where wish_id = p_wish_id and wish_user_id = p_user_id;
-END
+END $$
 
 
-$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_updateWish`(
-IN p_title varchar(45),
-IN p_description varchar(1000),
-IN p_wish_id bigint,
-In p_user_id bigint
+
+
+DELIMITER $$
+ use users;
+DROP procedure IF EXISTS `users`.`sp_GethaveById`;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GethaveById`(
+In p_user_id INT
 )
 BEGIN
-update ring_wish set wish_id = p_title,wish_description = p_description
-    where wish_id = p_wish_id and wish_user_id = p_user_id;
+select * from ring_users where wish_id = p_wish_id and wish_user_id = p_user_id;
+END $$
+
+
+
+
+DROP  PROCEDURE  if EXISTS `users`.`sp_GetHaveByUser`;
+
+CREATE  DEFINER =`root`@`localhost` PROCEDURE  `sp_GetHaveByUser`(
+in p_user_id INT
+)
+BEGIN
+  SELECT * FROM  ring_users WHERE  user_id = p_user_id ;
+END $$
+
+
+
+
+DROP procedure IF EXISTS `users`.`sp_updateWish`;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_updateWish`(
+IN p_title INT,
+IN p_description varchar(1000),
+IN p_wish_id INT,
+In p_user_id INT
+)
+BEGIN
+update ring_wish set wish_num = p_title,wish_description = p_description where wish_id = p_wish_id and wish_user_id = p_user_id;
 END$$
+
 DELIMITER ;
+
+
+DELIMITER $$
+DROP procedure IF EXISTS `users`.`sp_updateHave`;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_updateHave`(
+IN p_title INT,
+IN p_description varchar(1000),
+In p_user_id INT
+)
+BEGIN
+update ring_users set ihave = p_title,ihave_des = p_description where user_id = p_user_id;
+END$$
+
+delimiter ;
+
+
 
 
 
 DELIMITER $$
 USE `users`$$
 CREATE PROCEDURE `sp_deleteWish` (
-IN p_wish_id bigint,
-IN p_user_id bigint
+IN p_wish_id int,
+IN p_user_id int
 )
 BEGIN
 delete from ring_wish where wish_id = p_wish_id and wish_user_id = p_user_id;
