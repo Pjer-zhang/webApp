@@ -1,38 +1,62 @@
-var navbarHeight = $('.navbar').height();
-
-$(window).scroll(function() {
-  var navbarColor = "255,255,255";//color attr for rgba
-  var smallLogoHeight = $('.small-logo').height();
-  var bigLogoHeight = $('.big-logo').height();
 
 
-  var smallLogoEndPos = 0;
-  var smallSpeed = (smallLogoHeight / bigLogoHeight);
+$(function(){
+var div = $('<div>')
+    .attr('class', 'list-group')
+    .append($('<a>')
+        .attr('class', 'list-group-item col-xs-3').attr('style','width:140px;margin:5px')
+        .append($('<h4>')
+            .attr('class', 'list-group-item-heading'),
+            $('<p>')
+            .attr('class', 'list-group-item-text')));
 
-  var ySmall = ($(window).scrollTop() * smallSpeed);
+		$.ajax({
+			url : '/getAllWish',
+			type : 'GET',
+			success: function(res){
+                var wishObj = JSON.parse(res);
+				var wish = '';
+				
+				$.each(wishObj,function(index, value){
+					wish = $(div).clone();
+					$(wish).find('h4').text(value.num);
+					$(wish).find('p').text(value.name);
+					$(wish).find('a').attr('class','list-group-item active col-xs-3')
+                    $('#numList').append(wish);
+				});
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});
 
-  var smallPadding = navbarHeight - ySmall;
-  if (smallPadding > navbarHeight) { smallPadding = navbarHeight; }
-  if (smallPadding < smallLogoEndPos) { smallPadding = smallLogoEndPos; }
-  if (smallPadding < 0) { smallPadding = 0; }
+        $.ajax({
+			url : '/getAllHave',
+			type : 'GET',
+			success: function(res){
+				var wishObj = JSON.parse(res);
+				var wish = '';
 
-  $('.small-logo-container ').css({ "padding-top": smallPadding});
-
-  var navOpacity = ySmall / smallLogoHeight;
-  if  (navOpacity > 1) { navOpacity = 1; }
-  if (navOpacity < 0 ) { navOpacity = 0; }
-  var navBackColor = 'rgba(' + navbarColor + ',' + navOpacity + ')';
-  $('.navbar').css({"background-color": navBackColor});
-
-  var shadowOpacity = navOpacity * 0.4;
-  if ( ySmall > 1) {
-    $('.navbar').css({"box-shadow": "0 2px 3px rgba(0,0,0," + shadowOpacity + ")"});
-  } else {
-    $('.navbar').css({"box-shadow": "none"});
-  }
-
+				$.each(wishObj,function(index, value){
+					wish = $(div).clone();
+					$(wish).find('h4').text(value.num);
+					$(wish).find('p').text(value.name);
+					$('#haveList').append(wish);
+				});
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});
 
 
-});/**
+
+
+	});
+
+
+
+
+/**
  * Created by pjer on 2016/6/11.
  */

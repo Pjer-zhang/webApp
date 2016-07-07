@@ -20,7 +20,8 @@
 
   <body>
 
-  <nav class="navbar navbar-default" role="navigation">
+
+<nav class="navbar navbar-default" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -38,11 +39,10 @@
       <li class="active"><a href="#">Home</a></li>
       <li><a href="#">Number Pool</a></li>
       <li class="dropdown">
-        <a href="#" class="dropdown" data-toggle="dropdown">More <b class="caret"></b></a>
+        <a href="#" class="more" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="#">Random Ring</a></li>
           <li><a href="#">Hot Ring</a></li>
-            <li class="divider"></li>
           <li><a href="#">My github</a></li>
           <li><a href="#">contact Admin</a></li>
 
@@ -59,18 +59,10 @@
         </div>
         </form>
     </div>
-    <!--ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">settings</a></li>
-          <li><a href="#">Another action</a></li>
-          <li class="divider"></li>
-          <li><a href="#">signed in as</a></li>
-        </ul>
-      </li>
-    </ul-->
-  </div><!-- /.navbar-collapse -->
+     <div id="logdiv">
+      <div class="pull-right" style="margin-top: 5px">User: {{ user_name }}   <a class="btn btn-warning" role="button"  href="/logout">Log Out  <span class="glyphicon glyphicon-log-out"></span></a> </div>
+        </div>
+     </div><!-- /.navbar-collapse -->
 </nav>
 
 

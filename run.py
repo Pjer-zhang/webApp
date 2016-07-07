@@ -156,8 +156,8 @@ def addWish():
 
 @app.route('/getWish')
 def getWish():
-    con = mysql.connect()
-    cursor = con.cursor()
+    conn = mysql.connect()
+    cursor = conn.cursor()
     try:
         if session.get('user'):
             _user = session.get('user')
@@ -179,6 +179,57 @@ def getWish():
             return render_template('error.html', error='Unauthorized Access')
     except Exception as e:
         return render_template('error.html', error=str(e))
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+@app.route('/getAllWish')
+def getAllWish():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    try:
+            cursor.callproc('sp_Getallwish',(1,))
+            wishes = cursor.fetchall()
+
+            haves_dict = []
+            for wish in wishes:
+                have_dict = {
+                    'name': wish[0],
+                    'num': wish[1]}
+                haves_dict.append(have_dict)
+            return json.dumps(haves_dict)
+    except Exception as e:
+        return render_template('error.html', error=str(e))
+    finally:
+        cursor.close()
+        conn.close()
+
+
+@app.route('/getAllHave')
+def getAllHave():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    try:
+            cursor.callproc('sp_Getallhave',(1,))
+            wishes = cursor.fetchall()
+
+            wishes_dict = []
+            for wish in wishes:
+                wish_dict = {
+                    'name': wish[0],
+                    'num': wish[1]}
+                wishes_dict.append(wish_dict)
+            return json.dumps(wishes_dict)
+    except Exception as e:
+        return render_template('error.html', error=str(e))
+
+    finally:
+        cursor.close()
+        conn.close()
+
+
 
 
 @app.route('/getHave')

@@ -5,7 +5,7 @@
     <title>Pjer's App</title>
 
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
-      <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+      <link href="{{ url_for('static',filename = 'css/jumbotron-narrow.css') }}" rel="stylesheet">
       <script src="{{ url_for('static' ,filename = 'js/jquery-2.0.0.min.js')}}"></script>
       <script src="{{ url_for('static' ,filename = 'js/bootstrap.min.js')}}"></script>
       <link rel="stylesheet" href="{{url_for('static',filename='css/normalize.css')}}">
@@ -15,12 +15,13 @@
 
       <link href="{{ url_for('static' ,filename = 'css/signup.css')}}" rel="stylesheet">
       <script src="{{ url_for('static' ,filename = 'js/signUp.js')}}"></script >
-   
+      <script src="{{ url_for('static' ,filename = 'js/index.js')}}"></script >
+
   </head>
 
   <body>
 
-  <nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -38,11 +39,10 @@
       <li class="active"><a href="#">Home</a></li>
       <li><a href="#">Number Pool</a></li>
       <li class="dropdown">
-        <a href="#" class="dropdown" data-toggle="dropdown">More <b class="caret"></b></a>
+        <a href="#" class="more" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="#">Random Ring</a></li>
           <li><a href="#">Hot Ring</a></li>
-            <li class="divider"></li>
           <li><a href="#">My github</a></li>
           <li><a href="#">contact Admin</a></li>
 
@@ -59,18 +59,13 @@
         </div>
         </form>
     </div>
-    <!--ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">settings</a></li>
-          <li><a href="#">Another action</a></li>
-          <li class="divider"></li>
-          <li><a href="#">signed in as</a></li>
-        </ul>
-      </li>
-    </ul-->
-  </div><!-- /.navbar-collapse -->
+     <div id="logdiv">
+      <div class="pull-right" style="margin-top: 5px">
+          <a class="btn btn-lg btn-success" href="/showSignUp" role="button" style="text-align: -webkit-center">Sign Up</a>
+          <a class="btn btn-lg btn-success" href="/showSignin" role="button" style="text-align: -webkit-center">Log In</a>
+      </div>
+        </div>
+     </div><!-- /.navbar-collapse -->
 </nav>
 
 
@@ -86,13 +81,14 @@
         </nav>
         <h3 class="text-muted">Python Flask App</h3>
       </div-->
-
-      <div class="jumbotron">
-        <h1>Exchange Platform</h1>
-        <p class="lead"></p>
-        <p><a class="btn btn-lg btn-success" href="/showSignUp" role="button" style="text-align: -webkit-center">Sign up today</a></p>
-          <p style="align-content: center"><h2>or</h2></p>
-         <p> <a class="btn btn-lg btn-success" href="/showSignin" role="button" style="text-align: -webkit-center">Sign In to Exchange</a></p>
+        <div id="im"></div>
+      <div  class="container-fluid">
+          <p>have</p>
+          <div id="haveList"></div>
+          </div>
+      <div  class="container-fluid" style="margin-top: 40px">
+          <p>want</p>
+          <div id="numList"></div>
       </div>
 
 
