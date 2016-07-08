@@ -12,9 +12,7 @@ git clone https://github.com/Pjer-zhang/webApp.git
 让app跑起来
 
 依赖：
-
 数据库：**MySql**
-
 python：**flask,python-mysql,flask-mysql**
 
 
