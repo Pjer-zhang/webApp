@@ -6,6 +6,7 @@ get source code：
 ```
 git clone https://github.com/Pjer-zhang/webApp.git
 ```
+内容：使用flask作为框架，mysql数据库来存储用户信息数据的一个换物平台
 
 ##Detail
 ### Day one
