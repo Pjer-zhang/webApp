@@ -13,11 +13,23 @@
       <link rel="icon" href="{{url_for('static',filename='img/favicon.ico')}}" />
       <link rel="shortcut icon" href="{{url_for('static',filename='img/favicon.ico')}}" />
 
+      <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
       <link href="{{ url_for('static' ,filename = 'css/signup.css')}}" rel="stylesheet">
       <script src="{{ url_for('static' ,filename = 'js/signUp.js')}}"></script >
       <script src="{{ url_for('static' ,filename = 'js/index.js')}}"></script >
 
+
   </head>
+
+  <style>
+      .svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    vertical-align: middle;
+    horiz-align:  center;
+}
+  </style>
 
   <body>
 
@@ -81,7 +93,7 @@
         </nav>
         <h3 class="text-muted">Python Flask App</h3>
       </div-->
-        <div id="im"></div>
+        <div id="im" class="jumbotron svg-container" style="align-items: center"></div>
       <div  class="container-fluid">
           <p>have</p>
           <div id="haveList"></div>

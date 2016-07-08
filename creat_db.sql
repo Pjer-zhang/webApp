@@ -121,6 +121,39 @@ BEGIN
     select * from ring_wish where wish_user_id = p_user_id;
 END$$
 
+
+
+USE `users`;
+DROP procedure IF EXISTS `sp_Getallwish`;
+
+DELIMITER $$
+USE `users`$$
+CREATE PROCEDURE `sp_Getallwish` (
+IN p_user_id INT
+)
+BEGIN
+    select distinct user_name,wish_num from ring_users join ring_wish on ring_users.user_id = ring_wish.wish_user_id;
+END$$
+
+
+
+
+USE `users`;
+DROP procedure IF EXISTS `sp_Getallhave`;
+
+DELIMITER $$
+USE `users`$$
+CREATE PROCEDURE `sp_Getallhave` (
+IN p_user_id INT
+)
+BEGIN
+    select distinct user_name,ihave from ring_users join ring_wish on ring_users.user_id = ring_wish.wish_user_id;
+END$$
+
+
+
+
+
 DELIMITER ;
 
 ALTER DATABASE users CHARACTER SET utf8 COLLATE utf8_unicode_ci;
@@ -145,12 +178,12 @@ END $$
 
 DELIMITER $$
  use users;
-DROP procedure IF EXISTS `users`.`sp_GethaveById`;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GethaveById`(
+DROP procedure IF EXISTS `users`.`sp_GetHaveById`;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetHaveById`(
 In p_user_id INT
 )
 BEGIN
-select * from ring_users where wish_id = p_wish_id and wish_user_id = p_user_id;
+select ihave,ihave_des from ring_users where user_id = p_user_id;
 END $$
 
 
@@ -158,12 +191,14 @@ END $$
 
 DROP  PROCEDURE  if EXISTS `users`.`sp_GetHaveByUser`;
 
+DELIMITER $$
 CREATE  DEFINER =`root`@`localhost` PROCEDURE  `sp_GetHaveByUser`(
 in p_user_id INT
 )
 BEGIN
-  SELECT * FROM  ring_users WHERE  user_id = p_user_id ;
+SELECT * FROM  ring_users WHERE  user_id = p_user_id ;
 END $$
+
 
 
 
@@ -183,9 +218,9 @@ END$$
 DELIMITER ;
 
 
-DELIMITER $$
-DROP procedure IF EXISTS `users`.`sp_updateHave`;
 
+DROP procedure IF EXISTS `users`.`sp_updateHave`;
+DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_updateHave`(
 IN p_title INT,
 IN p_description varchar(1000),
@@ -195,7 +230,6 @@ BEGIN
 update ring_users set ihave = p_title,ihave_des = p_description where user_id = p_user_id;
 END$$
 
-delimiter ;
 
 
 
@@ -212,3 +246,4 @@ delete from ring_wish where wish_id = p_wish_id and wish_user_id = p_user_id;
 END$$
 
 DELIMITER ;
+
