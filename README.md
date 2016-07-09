@@ -10,7 +10,7 @@ git clone https://github.com/Pjer-zhang/webApp.git
 
 ##Detail
 ### Day one
-让app跑起来
+**让app跑起来**
 
 依赖：
 
