@@ -22,7 +22,7 @@ mysql.init_app(app)
 @app.route('/')
 def main():
     if session.get('user'):
-        return render_template('logined_index.html')
+        return render_template('logined_index.html', user_name=session['username'])
     else:
         return render_template('index.html')
 
@@ -50,6 +50,10 @@ def userHome():
         return render_template('userHome.html',user_name=session['username'])
     else:
         return render_template('error.html', error='Unauthorized Access')
+
+@app.route('/contact')
+def contactPage():
+    return render_template('contact.html')
 
 
 @app.route('/logout')

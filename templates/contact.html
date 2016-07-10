@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Info</title>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="{{ url_for('static' ,filename = 'css/signup.css')}}" rel="stylesheet">
+    <script src="{{ url_for('static' ,filename = 'js/jquery-1.11.2.js')}}"></script>
+    <script src="{{ url_for('static' ,filename = 'js/signUp.js')}}"></script>
+   
+  </head>
+
+  <body style="margin-top: 30px">
+
+    <div class="container">
+      <div class="header">
+        <nav>
+           <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="javascript:history.back()">Back</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted" style="color: #2e6da4;  ;font-size: xx-large">Contact Author:</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h2>Email</h2>
+          <ul class="list-group">
+              <li class="list-group-item">pjer1316@outlook.com</li>
+              <li class="list-group-item">pjer1316@icloud.com</li>
+              <li class="list-group-item">pjer1316@mail.ustc.edu.cn</li>
+              <li class="list-group-item">pjer1316@163.com</li>
+          </ul>
+          <h2>Wechat</h2>
+        <img src="{{ url_for('static',filename='img/me_vx.JPG') }}" class="img-rounded" width="300"/>
+          <h2>QQ</h2>
+          <h3>504658208</h3>
+      </div>
+
+      
+
+      <footer class="footer">
+        <p>&copy; Company 2015</p>
+      </footer>
+
+    </div>
+  </body>
+</html>
+

@@ -68,6 +68,7 @@ if __name__ == "__main__":
 
 ### Day 2
 **database**
+
 添加数据库和相应的接口，这里数据库使用MySql，安装过mysql之后为了能在python的flask环境中调用需要添加flask-mysql支持，
 ```python
 from flask.ext.mysql import MySQL
@@ -105,3 +106,11 @@ app.config['MYSQL_DATABASE_CHARSET'] =  'utf8'
 mysql.init_app(app)
 ```
 一个sql数据库query的小tip是尽量少用select * ... 只请求需要的数据列，安全且高效
+
+### Day 3
+**创建用户模式**
+
+在mysql和flask的支持下创建用户模式，包含注册，登陆，验证，授权，根据授权路由
+
+----------------------------------------------
+未完待续+1s

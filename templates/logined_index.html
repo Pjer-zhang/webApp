@@ -4,18 +4,21 @@
   <head>
     <title>Pjer's App</title>
 
+
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
-      <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+      <link href="{{ url_for('static',filename = 'css/jumbotron-narrow.css') }}" rel="stylesheet">
       <script src="{{ url_for('static' ,filename = 'js/jquery-2.0.0.min.js')}}"></script>
       <script src="{{ url_for('static' ,filename = 'js/bootstrap.min.js')}}"></script>
       <link rel="stylesheet" href="{{url_for('static',filename='css/normalize.css')}}">
       <link rel='stylesheet prefetch' href="{{url_for('static',filename='css/bootstrap.min.css')}}">
       <link rel="icon" href="{{url_for('static',filename='img/favicon.ico')}}" />
       <link rel="shortcut icon" href="{{url_for('static',filename='img/favicon.ico')}}" />
-      
+
+      <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
       <link href="{{ url_for('static' ,filename = 'css/signup.css')}}" rel="stylesheet">
       <script src="{{ url_for('static' ,filename = 'js/signUp.js')}}"></script >
-   
+      <script src="{{ url_for('static' ,filename = 'js/index.js')}}"></script >
+
   </head>
 
   <body>
@@ -41,10 +44,9 @@
       <li class="dropdown">
         <a href="#" class="more" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Random Ring</a></li>
-          <li><a href="#">Hot Ring</a></li>
-          <li><a href="#">My github</a></li>
-          <li><a href="#">contact Admin</a></li>
+          <li><a href="https://github.com/Pjer-zhang">My github</a></li>
+          <li><a href="/contact">contact Admin</a></li>
+
 
         </ul>
       </li>
@@ -78,11 +80,14 @@
         </nav>
         <h3 class="text-muted">Python Flask App</h3>
       </div-->
-
-      <div class="jumbotron">
-        <h1>Exchange Platform</h1>
-        <p class="lead"></p>
-          <p style="align-content: center"><h2>Login Passed</h2></p>
+        <div id="im" class="jumbotron svg-container" style="align-items: center"></div>
+      <div  class="container-fluid">
+          <p>have</p>
+          <div id="haveList"></div>
+          </div>
+      <div  class="container-fluid" style="margin-top: 40px">
+          <p>want</p>
+          <div id="numList"></div>
       </div>
 
 
